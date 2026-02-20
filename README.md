@@ -1,5 +1,11 @@
 # 🎵 YTM Keep-Alive
 
+<img width="1919" height="1079" alt="screenshot (3)" src="https://github.com/user-attachments/assets/cec301b1-2d8d-49bf-8288-2192fa0441bf" />
+<br> <div align="center">
+  <img src="https://github.com/user-attachments/assets/254a8d7b-50ee-4673-904d-335dd96314a1" width="49%" alt="screenshot (1)" />
+  <img src="https://github.com/user-attachments/assets/69bb4f2b-cfac-4f47-b6b3-1140a6aef72b" width="49%" alt="screenshot (2)" />
+</div>
+
 A lightweight, pure DOM bookmarklet to prevent YouTube and YouTube Music from pausing with the *"Video paused. Continue watching?"* prompt.
 
 ## ✨ Features
