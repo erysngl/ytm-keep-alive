@@ -1,17 +1,17 @@
 # 🎵 YTM Keep-Alive
 
-A lightweight, extension-free bookmarklet to prevent YouTube and YouTube Music from pausing with the *"Video paused. Continue watching?"* prompt.
+A lightweight, pure DOM bookmarklet to prevent YouTube and YouTube Music from pausing with the *"Video paused. Continue watching?"* prompt.
 
 ## ✨ Features
 * **No Extensions Required:** Keeps your browser fast and clean.
-* **100% Safe (TrustedHTML Bypass):** Built entirely with pure DOM elements (`document.createElement`). It does not use `innerHTML`, so it completely bypasses YouTube's strict Content Security Policy (CSP).
+* **100% Safe (TrustedHTML Bypass):** Built entirely with pure DOM elements (`document.createElement`). It does not use `innerHTML`, completely bypassing YouTube's strict Content Security Policy (CSP).
 * **Draggable UI:** Features a sleek, dark-themed floating timer that you can drag anywhere on the screen.
 * **Smart Detection:** Clicks the "Yes" confirmation button automatically within seconds of it appearing.
 
 ## 🚀 Easy Installation
 You don't need to copy or paste any code. 
 
-1. Go to the **[Installation Page](https://YOUR_USERNAME.github.io/ytm-keep-alive)** *(Note: Replace this link after Step 4)*
+1. Go to the **[Installation Page](https://erysngl.github.io/ytm-keep-alive/)**
 2. Drag and drop the red **"Drag to Bookmarks"** button to your browser's bookmarks bar.
 3. Open YouTube Music, click the bookmark, and enjoy uninterrupted music!
 
