@@ -23,3 +23,33 @@ You don't need to copy or paste any code.
 
 ## 🛠️ How it Works
 Once activated, it creates a small floating widget. Every 60 seconds, it performs a 1-pixel micro-scroll to simulate user activity and scans the DOM for the confirmation prompt. If found, it automatically clicks it and logs "Pause Prevented!" on the widget.
+
+## 🌐 Browser Support
+
+This bookmarklet uses standard web APIs and pure DOM manipulation, making it fully compatible with all modern desktop browsers:
+
+- ✅ **Google Chrome** (Windows, macOS, Linux)
+- ✅ **Mozilla Firefox**
+- ✅ **Microsoft Edge**
+- ✅ **Brave Browser**
+- ✅ **Opera / Opera GX**
+- ✅ **Safari** (macOS)
+
+*Note: Mobile browsers generally do not support a traditional bookmarks bar for bookmarklets, so this tool is designed for desktop use.*
+
+## 👨‍💻 For Developers
+
+The code inside the installation button on the `index.html` page is minified to work effectively as a single-line bookmarklet. 
+
+If you want to read, review, or contribute to the source code, please check the **[`ytm-keep-alive.js`](./ytm-keep-alive.js)** file. It contains the fully formatted, commented, and readable version of the script. 
+
+*Note: All pull requests modifying the core logic should be applied to `ytm-keep-alive.js` first.*
+
+<div align="center">
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![No Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg?style=for-the-badge)
+![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-blue.svg?style=for-the-badge)
+
+</div>
