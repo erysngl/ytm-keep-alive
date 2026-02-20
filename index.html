@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YTM Keep-Alive Installer</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f0f; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
+        .card { background-color: #1e1e1e; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 450px; border: 1px solid #333; }
+        h1 { color: #ff0000; margin-bottom: 10px; }
+        p { color: #aaa; line-height: 1.6; }
+        .drag-button { display: inline-block; background-color: #ff0000; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; margin: 25px 0; cursor: move; transition: transform 0.2s, background-color 0.2s; border: 2px dashed rgba(255,255,255,0.3); }
+        .drag-button:hover { background-color: #cc0000; transform: scale(1.05); }
+        .instructions { background: #2a2a2a; padding: 15px; border-radius: 8px; font-size: 14px; margin-top: 20px; border-left: 4px solid #ff0000; text-align: left; }
+        code { background: #444; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>YTM Keep-Alive</h1>
+    <p>A pure DOM, extension-free bookmarklet that prevents YouTube Music from pausing automatically. 100% safe and bypasses TrustedHTML restrictions.</p>
+    
+    <a class="drag-button" href="javascript:(function(){if(document.getElementById('ytm-keep-alive-ui'))return;const ui=document.createElement('div');ui.id='ytm-keep-alive-ui';Object.assign(ui.style,{position:'fixed',top:'100px',right:'20px',width:'180px',backgroundColor:'rgb(29,29,29)',color:'white',borderRadius:'8px',boxShadow:'0 10px 30px rgba(0,0,0,0.5)',zIndex:'99999',fontFamily:'Roboto,Arial,sans-serif',border:'1px solid rgb(51,51,51)'});const header=document.createElement('div');header.id='ytm-header';Object.assign(header.style,{cursor:'move',background:'rgb(33,33,33)',padding:'8px 12px',borderBottom:'1px solid rgb(51,51,51)',fontWeight:'bold',display:'flex',justifyContent:'space-between',alignItems:'center',borderRadius:'8px 8px 0 0'});const titleSpan=document.createElement('span');Object.assign(titleSpan.style,{color:'red',fontSize:'12px'});titleSpan.textContent='● ';const titleText=document.createElement('span');Object.assign(titleText.style,{color:'white'});titleText.textContent='YTM Keep-Alive';titleSpan.appendChild(titleText);const closeBtn=document.createElement('button');closeBtn.id='ytm-close';Object.assign(closeBtn.style,{background:'none',border:'none',color:'lightgray',cursor:'pointer',fontSize:'16px'});closeBtn.textContent='×';header.appendChild(titleSpan);header.appendChild(closeBtn);const bodyDiv=document.createElement('div');Object.assign(bodyDiv.style,{padding:'15px',textAlign:'center'});const statusDiv=document.createElement('div');statusDiv.id='ytm-status';Object.assign(statusDiv.style,{fontSize:'11px',marginBottom:'10px',color:'rgb(15,157,88)'});statusDiv.textContent='Active: Monitoring';const timerDiv=document.createElement('div');timerDiv.id='ytm-timer';Object.assign(timerDiv.style,{fontSize:'24px',fontWeight:'bold',color:'white',marginBottom:'5px'});timerDiv.textContent='00:00';const infoDiv=document.createElement('div');Object.assign(infoDiv.style,{fontSize:'10px',color:'gray'});infoDiv.textContent='Next trigger in 60s';bodyDiv.appendChild(statusDiv);bodyDiv.appendChild(timerDiv);bodyDiv.appendChild(infoDiv);ui.appendChild(header);ui.appendChild(bodyDiv);document.body.appendChild(ui);let seconds=0;const interval=setInterval(()=>{seconds++;let m=Math.floor(seconds/60);let s=seconds-(m*60);timerDiv.textContent=(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);if(s===0){const btn=document.querySelector('tp-yt-paper-button[id=%22button%22],yt-button-renderer[id=%22confirm-button%22]');if(btn&&(btn.textContent.includes('YES')||btn.textContent.includes('EVET'))){btn.click();statusDiv.textContent='Pause Prevented!';setTimeout(()=>statusDiv.textContent='Active: Monitoring',3000);}window.scrollBy(0,1);window.scrollBy(0,-1);}},1000);closeBtn.onclick=()=>{clearInterval(interval);ui.remove();};let pos1=0,pos2=0,pos3=0,pos4=0;header.onmousedown=(e)=>{pos3=e.clientX;pos4=e.clientY;document.onmouseup=()=>{document.onmouseup=null;document.onmousemove=null;};document.onmousemove=(e)=>{pos1=pos3-e.clientX;pos2=pos4-e.clientY;pos3=e.clientX;pos4=e.clientY;ui.style.top=(ui.offsetTop-pos2)+%22px%22;ui.style.left=(ui.offsetLeft-pos1)+%22px%22;};};})();">
+        Drag to Bookmarks
+    </a>
+
+    <div class="instructions">
+        <strong>How to install:</strong><br>
+        1. Click and hold the red button above.<br>
+        2. Drag it to your browser's <strong>Bookmarks Bar</strong>.<br>
+        3. Open YouTube Music and click the new bookmark to activate!
+    </div>
+    
+    <p style="margin-top: 15px; font-size: 11px;">If your bookmarks bar is hidden, press <code>Ctrl + Shift + B</code></p>
+</div>
+
+</body>
+</html>
