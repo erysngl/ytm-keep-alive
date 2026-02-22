@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YTM Keep-Alive Kurulum</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f0f; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; }
+        .card { background-color: #1e1e1e; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 450px; border: 1px solid #333; position: relative; }
+        .lang-switch { text-align: right; margin-bottom: 20px; font-size: 14px; }
+        .lang-switch a { color: #aaa; text-decoration: none; transition: color 0.2s; }
+        .lang-switch a:hover { color: white; }
+        h1 { color: #ff0000; margin-bottom: 10px; margin-top: 0; }
+        p { color: #aaa; line-height: 1.6; }
+        .drag-button { display: inline-block; background-color: #ff0000; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 18px; margin: 25px 0; cursor: move; transition: transform 0.2s, background-color 0.2s; border: 2px dashed rgba(255,255,255,0.3); }
+        .drag-button:hover { background-color: #cc0000; transform: scale(1.05); }
+        .instructions { background: #2a2a2a; padding: 15px; border-radius: 8px; font-size: 14px; margin-top: 20px; border-left: 4px solid #ff0000; text-align: left; }
+        code { background: #444; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="lang-switch">
+        <a href="index.html">🇬🇧 English</a> | <b>🇹🇷 Türkçe</b>
+    </div>
+
+    <h1>YTM Keep-Alive</h1>
+    <p>YouTube Music'in otomatik olarak duraklamasını engelleyen, eklenti gerektirmeyen, saf DOM tabanlı bir yer imi. %100 güvenlidir ve TrustedHTML kısıtlamalarını aşar.</p>
+    
+    <a class="drag-button" href="javascript:void((function(){if(document.getElementById('ytm-keep-alive-ui'))return;try{Object.defineProperty(document,'visibilityState',{get:()=>'visible'});Object.defineProperty(document,'hidden',{get:()=>false});document.addEventListener('visibilitychange',e=>e.stopImmediatePropagation(),true);}catch(e){}const ui=document.createElement('div');ui.id='ytm-keep-alive-ui';Object.assign(ui.style,{position:'fixed',top:'100px',right:'20px',width:'180px',backgroundColor:'rgb(29,29,29)',color:'white',borderRadius:'8px',boxShadow:'0 10px 30px rgba(0,0,0,0.5)',zIndex:'99999',fontFamily:'Roboto,Arial,sans-serif',border:'1px solid rgb(51,51,51)'});const header=document.createElement('div');header.id='ytm-header';Object.assign(header.style,{cursor:'move',background:'rgb(33,33,33)',padding:'8px 12px',borderBottom:'1px solid rgb(51,51,51)',fontWeight:'bold',display:'flex',justifyContent:'space-between',alignItems:'center',borderRadius:'8px 8px 0 0'});const titleSpan=document.createElement('span');const redDot=document.createElement('span');redDot.style.color='red';redDot.textContent='● ';titleSpan.appendChild(redDot);titleSpan.appendChild(document.createTextNode('YTM Keep-Alive (TR)'));const closeBtn=document.createElement('button');closeBtn.textContent='×';Object.assign(closeBtn.style,{background:'none',border:'none',color:'lightgray',cursor:'pointer',fontSize:'16px'});header.appendChild(titleSpan);header.appendChild(closeBtn);const bodyDiv=document.createElement('div');Object.assign(bodyDiv.style,{padding:'15px',textAlign:'center'});const statusDiv=document.createElement('div');statusDiv.id='ytm-status';Object.assign(statusDiv.style,{fontSize:'11px',marginBottom:'10px',color:'rgb(15,157,88)'});statusDiv.textContent='Durum: Aktif';const timerDiv=document.createElement('div');Object.assign(timerDiv.style,{fontSize:'24px',fontWeight:'bold',color:'white',marginBottom:'5px'});timerDiv.textContent='00:00';const statsDiv=document.createElement('div');Object.assign(statsDiv.style,{fontSize:'12px',color:'rgb(170,170,170)',marginTop:'8px',borderTop:'1px solid #333',paddingTop:'8px'});statsDiv.textContent='Engellenen: 0';bodyDiv.appendChild(statusDiv);bodyDiv.appendChild(timerDiv);bodyDiv.appendChild(statsDiv);ui.appendChild(header);ui.appendChild(bodyDiv);document.body.appendChild(ui);let sec=0;let blocks=0;const interval=setInterval(()=>{sec++;let m=Math.floor(sec/60);let s=sec-(m*60);timerDiv.textContent=(m<10?'0'+m:m)+':'+(s<10?'0'+s:s);const btn=document.querySelector('ytmusic-you-there-renderer [dialog-confirm] button');if(btn&&btn.offsetWidth>0){btn.click();blocks++;statsDiv.textContent='Engellenen: '+blocks;statusDiv.textContent='Engel Aşıldı!';statusDiv.style.color='#ff0000';setTimeout(()=>{const player=document.getElementById('movie_player');if(player&&typeof player.playVideo==='function'){player.playVideo();}else{const v=document.querySelector('video');if(v&&v.paused)v.play().catch(e=>{});}},500);setTimeout(()=>{statusDiv.textContent='Durum: Aktif';statusDiv.style.color='rgb(15,157,88)';},3000);}if(s===0){window.scrollBy(0,1);window.scrollBy(0,-1);}},1000);closeBtn.onclick=()=>{clearInterval(interval);ui.remove();};let p1=0,p2=0,p3=0,p4=0;header.onmousedown=(e)=>{p3=e.clientX;p4=e.clientY;document.onmouseup=()=>{document.onmouseup=null;document.onmousemove=null;};document.onmousemove=(e)=>{p1=p3-e.clientX;p2=p4-e.clientY;p3=e.clientX;p4=e.clientY;ui.style.top=(ui.offsetTop-p2)+'px';ui.style.left=(ui.offsetLeft-p1)+'px';};};})());">
+    YTM Keep-Alive (TR) 🎵
+    </a>
+
+    <div class="instructions">
+        <strong>Nasıl kurulur:</strong><br>
+        1. Yukarıdaki kırmızı butona farenizle basılı tutun.<br>
+        2. Tarayıcınızın <strong>Yer İmleri (Sık Kullanılanlar) Çubuğu</strong>'na sürükleyip bırakın.<br>
+        3. YouTube Music'i açın ve aktifleştirmek için yeni yer iminize tıklayın!
+    </div>
+    
+    <p style="margin-top: 15px; font-size: 11px;">Yer imleri çubuğunuz gizliyse <code>Ctrl + Shift + B</code> tuşlarına basın.</p>
+</div>
+
+</body>
+</html>
