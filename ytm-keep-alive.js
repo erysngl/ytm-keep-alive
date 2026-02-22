@@ -1,5 +1,5 @@
 /**
- * YTM Keep-Alive v1.2.0
+ * YTM Keep-Alive v1.3.0
  * Added: Gamification counter to track how many times the script blocked pauses.
  * Fixed: Background tab throttling issues by checking every single second.
  * Fixed: Ghost button bug (Script now only clicks when the button is actually visible).
