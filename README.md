@@ -1,3 +1,7 @@
+<div align="right">
+  <b>🇬🇧 English</b> | <a href="README-tr.md">🇹🇷 Türkçe</a>
+</div>
+
 # 🎵 YTM Keep-Alive
 
 <img width="1919" height="1079" alt="screenshot (3)" src="https://github.com/user-attachments/assets/cec301b1-2d8d-49bf-8288-2192fa0441bf" />
@@ -22,7 +26,7 @@ You don't need to copy or paste any code.
 3. Open YouTube Music, click the bookmark, and enjoy uninterrupted music!
 
 ## 🛠️ How it Works
-Once activated, it creates a small floating widget. Every 60 seconds, it performs a 1-pixel micro-scroll to simulate user activity and scans the DOM for the confirmation prompt. If found, it automatically clicks it and logs "Pause Prevented!" on the widget.
+Once activated, it creates a sleek floating widget. It now scans the DOM **every single second** for the confirmation prompt, ensuring lightning-fast detection. To prevent the browser from suspending the background tab, it bypasses the Page Visibility API and performs a 1-pixel micro-scroll every minute. If the prompt is found, it automatically clicks it, increments the live **"Prevented" counter**, and displays a "Pause Prevented!" notification on the widget.
 
 ## 🌐 Browser Support
 
