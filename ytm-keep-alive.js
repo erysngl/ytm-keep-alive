@@ -1,12 +1,26 @@
 /**
  * YTM Keep-Alive v1.2.0
  * Added: Gamification counter to track how many times the script blocked pauses.
- * Fixed: Background tab throttling issues by checking every second.
+ * Fixed: Background tab throttling issues by checking every single second.
+ * Fixed: Ghost button bug (Script now only clicks when the button is actually visible).
+ * Fixed: Page Visibility API bypass to allow background auto-play to resume immediately.
  */
 
 (function () {
+    // 1. Prevent multiple instances
     if (document.getElementById('ytm-keep-alive-ui')) return;
 
+    // 2. The Illusion Tactic: Blind the Page Visibility API
+    // This forces YouTube to think the tab is always active and visible in the foreground.
+    try {
+        Object.defineProperty(document, 'visibilityState', { get: () => 'visible' });
+        Object.defineProperty(document, 'hidden', { get: () => false });
+        document.addEventListener('visibilitychange', (e) => e.stopImmediatePropagation(), true);
+    } catch (e) {
+        console.warn("YTM Keep-Alive: Could not override visibility state.", e);
+    }
+
+    // 3. UI Creation (Floating Panel)
     const ui = document.createElement('div');
     ui.id = 'ytm-keep-alive-ui';
     Object.assign(ui.style, {
@@ -61,33 +75,62 @@
     ui.appendChild(bodyDiv);
     document.body.appendChild(ui);
 
+    // 4. Core Logic: Aggressive Monitoring
     let sec = 0;
     let blocks = 0; // Counter for prevented pauses
+    
     const interval = setInterval(() => {
         sec++;
+        // Calculate minutes and seconds without the modulo (%) operator to avoid bookmarklet URL encoding issues
         let m = Math.floor(sec / 60);
         let s = sec - (m * 60);
         timerDiv.textContent = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
 
+        // Look for the specific confirmation button
         const btn = document.querySelector('ytmusic-you-there-renderer [dialog-confirm] button');
-        if (btn) {
-            btn.click();
+        
+        // Check if the button exists AND is actually visible on the screen (Prevents ghost clicking)
+        if (btn && btn.offsetWidth > 0) {
+            btn.click(); // Dismiss the popup
             blocks++; // Increment the counter
             statsDiv.textContent = 'Prevented: ' + blocks; // Update the UI
+            
             statusDiv.textContent = 'Pause Prevented!';
-            setTimeout(() => statusDiv.textContent = 'Active: Monitoring', 3000);
+            statusDiv.style.color = '#ff0000';
+
+            // Force play the media if the browser paused it in the background
+            setTimeout(() => {
+                const player = document.getElementById('movie_player');
+                // Primary: Use YouTube's internal API to bypass standard DOM restrictions
+                if (player && typeof player.playVideo === 'function') {
+                    player.playVideo(); 
+                } else {
+                    // Fallback: Use standard HTML5 video API
+                    const v = document.querySelector('video');
+                    if (v && v.paused) {
+                        v.play().catch(e => console.log('YTM Keep-Alive: Force play blocked.', e));
+                    }
+                }
+            }, 500); // Wait 500ms for the UI to settle
+
+            // Reset status text color after 3 seconds
+            setTimeout(() => {
+                statusDiv.textContent = 'Active: Monitoring';
+                statusDiv.style.color = 'rgb(15,157,88)';
+            }, 3000);
         }
 
-        // Nudge the scroll slightly to keep the browser active every minute
+        // Activity Nudge: Scroll slightly to prevent browser's deep sleep mode every minute
         if (s === 0) {
             window.scrollBy(0, 1);
             window.scrollBy(0, -1);
         }
     }, 1000);
 
+    // Close button logic
     closeBtn.onclick = () => { clearInterval(interval); ui.remove(); };
 
-    // Drag and drop logic
+    // 5. Drag and drop UI logic
     let p1 = 0, p2 = 0, p3 = 0, p4 = 0;
     header.onmousedown = (e) => {
         p3 = e.clientX; p4 = e.clientY;
